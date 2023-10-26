@@ -1,0 +1,267 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    background-color: #E3F2FD;
+    overflow: hidden; /* Prevent scrolling */
+    position: relative; /* Establish a stacking context for z-index */
+}
+
+#balloon-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* This ensures that the balloons outside the container are not shown */
+    pointer-events: none; /* This makes the container not interfere with user interactions */
+    z-index: 5; /* Keep it behind other content */
+}
+
+.balloon {
+    position: absolute; /* Absolute positioning within the container */
+    bottom: -100px;
+    width: 100px; 
+    height: 150px;
+    background-image: url('./balloon.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 5; 
+    /* Individual animation properties removed here, they will be added inline via JavaScript */
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) translateX(-50%); /* Center the balloon */
+    }
+    100% {
+        transform: translateY(-320%) translateX(-80%); /* Move it up past the viewport */
+    }
+}
+
+.envelope {
+    width: 400px;
+    height: 300px;
+    background-color: #F8DE7E;
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    perspective: 1500px;
+    transform-style: preserve-3d;
+    transition: top 1s; /* Adjusted for smoother transition */
+    z-index: 1000;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+.envelope-frame {
+    width: 350px; /* Adjust as necessary */
+    height: 220px; /* Adjust as necessary */
+    border: 2px solid #000; /* Adjust border color as necessary */
+    box-sizing: border-box; /* Ensures the border width doesn't add to the size of the box */
+    margin-bottom: 10px; /* Space between the frame and the text */
+}
+.envelope-image {
+    max-width: 100%; /* Ensures the image doesn't overflow the frame */
+    max-height: 100%; /* Adjust as necessary */
+    display: block; /* Removes any unwanted space around the image */
+}
+.envelope-base,
+.envelope-lid {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #F8DE7E;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 2px solid #90CAF9;
+    z-index: 2;
+}
+
+.envelope-lid {
+    transform-origin: 50% 0;
+    transition: transform 1s ease-in-out;
+}
+
+.envelope.unfolded .envelope-lid {
+    transform: rotateX(180deg);
+}
+
+.invitation-content {
+    visibility: hidden;
+    background-color: #F8DE7E;
+    border-radius: 15px;
+    padding: 20px;
+    z-index: 1;
+    text-align: center;
+}
+
+.invitation-content h1 {
+    color: #1E88E5;
+    margin-bottom: 10px;
+}
+
+.invitation-content p {
+    color: #546E7A;
+}
+
+.rsvp-button {
+    background-color: #42A5F5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.rsvp-button:hover {
+    background-color: #1E88E5;
+}
+
+.envelope-image {
+    display: block;
+    width: 100%; /* This will make the image fill the width of its container. Adjust as necessary. */
+    height: auto; /* This will maintain the aspect ratio of your image. */
+    object-fit: cover; /* This will cover the entire area of the container without distorting the image. */
+    object-position: center; /* This will center the image within the area. */
+}
+
+.envelope-front-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #1E88E5;
+    font-family: 'Pacifico'; 
+    font-size: 1.3em;
+    text-align: center;
+    pointer-events: none;
+    transition: opacity 0.5s, visibility 0.5s; /* Updated for a smoother transition */
+    z-index: 4;
+}
+
+.gif {
+    visibility: hidden;
+    width: 95%; 
+    height: auto;
+    margin: 10px;
+    object-position: center;  
+    transform: rotate(180deg);
+}
+.envelope.unfolded .invitation-content {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    z-index: 3;
+}
+
+.envelope.unfolded .envelope-front-text {
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: 0s; 
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    left: 50%; /* Center the left edge */
+    top: 50%; /* Center the top edge */
+    transform: translate(-50%, -50%); 
+    width: 450px; /* Full width */
+    height: 450px; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.7); /* Black with a little transparency */
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 25% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%; /* Could be more or less, depending on screen size */
+    z-index: 9999;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #ffffff;
+    border-radius: 50%; 
+    padding: 5px;
+    text-align: center;
+}
+
+.rsvp-button {
+    background: linear-gradient(135deg, #F06, #9F6); /* gradient background */
+    border: none;
+    color: white;
+    padding: 10px 20px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px; /* rounded corners */
+    transition: background-color 0.3s, transform 0.3s; /* transition for hover effect */
+}
+
+.rsvp-button:hover {
+    background: linear-gradient(135deg, #E05, #8E5); /* slightly altered gradient for hover */
+    transform: scale(1.05); /* slightly enlarges the button on hover */
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#rsvpModal {
+    border-radius: 50%; /* Makes the modal circular */
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 768px) { /* Styles for screens 768px or smaller */
+
+    /* Envelope Styles */
+    .envelope {
+        width: 80vw; /* Viewport width - makes it relative to screen width */
+        height: 60vw;
+    }
+
+    .envelope-frame {
+        width: 70vw;
+        height: 34vw;
+    }
+
+    /* Modal adjustments */
+    .modal-content {
+        width: 60%; 
+        margin-top: 10%; 
+    }
+
+    #rsvpModal {
+        width: 85vw;
+        height: 85vw; /* Keep it almost square */
+    }
+    
+    /* Text adjustments */
+    .invitation-content h1 {
+        font-size: 1.5rem; /* Increase font size for better readability */
+    }
+
+    .invitation-content p {
+        font-size: 1rem;
+    }
+
+    .rsvp-button {
+        font-size: 1.2rem; /* Make button text larger for better touch targets */
+        padding: 15px 30px;
+    }
+
+}
