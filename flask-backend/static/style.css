@@ -120,10 +120,10 @@ body, html {
 
 .envelope-image {
     display: block;
-    width: 100%; /* This will make the image fill the width of its container. Adjust as necessary. */
-    height: auto; /* This will maintain the aspect ratio of your image. */
-    object-fit: cover; /* This will cover the entire area of the container without distorting the image. */
-    object-position: center; /* This will center the image within the area. */
+    width: 100%; 
+    height: auto; 
+    object-fit: cover; 
+    object-position: center; 
 }
 
 .envelope-front-text {
@@ -161,24 +161,24 @@ body, html {
     transition-delay: 0s; 
 }
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    left: 50%; /* Center the left edge */
-    top: 50%; /* Center the top edge */
+    display: none; 
+    position: fixed; 
+    left: 50%; 
+    top: 50%; 
     transform: translate(-50%, -50%); 
-    width: 450px; /* Full width */
-    height: 450px; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    width: 450px;
+    height: 450px; 
+    overflow: auto; 
     background-color: rgba(0,0,0,0.7); /* Black with a little transparency */
     z-index: 999;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 25% auto; /* 15% from the top and centered */
+    margin: 25% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 70%; /* Could be more or less, depending on screen size */
+    width: 70%; 
     z-index: 9999;
 }
 
@@ -206,12 +206,12 @@ body, html {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 12px; /* rounded corners */
-    transition: background-color 0.3s, transform 0.3s; /* transition for hover effect */
+    transition: background-color 0.3s, transform 0.3s; 
 }
 
 .rsvp-button:hover {
     background: linear-gradient(135deg, #E05, #8E5); /* slightly altered gradient for hover */
-    transform: scale(1.05); /* slightly enlarges the button on hover */
+    transform: scale(1.05); 
 }
 
 .close:hover,
@@ -230,7 +230,7 @@ body, html {
 
     /* Envelope Styles */
     .envelope {
-        width: 80vw; /* Viewport width - makes it relative to screen width */
+        width: 80vw; 
         height: 60vw;
     }
 
@@ -247,7 +247,7 @@ body, html {
 
     #rsvpModal {
         width: 85vw;
-        height: 85vw; /* Keep it almost square */
+        height: 85vw; 
     }
     
     /* Text adjustments */
