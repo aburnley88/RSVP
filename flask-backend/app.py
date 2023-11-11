@@ -34,5 +34,12 @@ def get_rsvps():
     rsvps = RSVP.query.all()
     return jsonify([{'name': rsvp.name, 'email': rsvp.email} for rsvp in rsvps]), 200
 
+@app.route('/hangman')
+def hangman():
+    return render_template('hangman.html')
+
+@app.route('/trivia')
+def trivia():
+    return render_template('trivia.html')
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
